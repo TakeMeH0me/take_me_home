@@ -10,6 +10,12 @@ class CreateOrEditHomePage extends StatefulWidget {
 class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Text('Create or Edit Home Page');
+    return const Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Text('Create Or Edit Home Page'),
+        ),
+      ),
+    );
   }
 }
