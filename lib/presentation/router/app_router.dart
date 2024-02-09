@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:take_me_home/app.dart';
 import '../pages/pages.dart';
 
 class AppRouter {
-  static const String showHomes = '/';
+  static const String root = '/';
   static const String createOrEditHome = '/create_or_edit_home';
   static const String showWayToHome = '/show_way_to_home';
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case showHomes:
-        return MaterialPageRoute(builder: (_) => const ShowHomesPage());
+      case root:
+        return MaterialPageRoute(builder: (_) => const App());
       case createOrEditHome:
         return MaterialPageRoute(builder: (_) => const CreateOrEditHomePage());
       case showWayToHome:
