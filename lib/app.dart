@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:take_me_home/presentation/pages/pages.dart';
 import 'package:take_me_home/presentation/router/app_router.dart';
 
+/// Wrapper for the [MainApp].
+/// Controls logic for stuff like tabs, etc.
 class App extends StatefulWidget {
   const App({super.key});
 

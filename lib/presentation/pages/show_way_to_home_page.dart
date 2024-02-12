@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Show one trip to the selected home with single stations,
+/// time between the stations and information to each single station.
+///
+/// The home was selected in [ShowHomesPage].
 class ShowWayToHomePage extends StatefulWidget {
   const ShowWayToHomePage({super.key});
 
