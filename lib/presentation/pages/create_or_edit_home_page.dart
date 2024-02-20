@@ -49,54 +49,58 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(children: [
-          const Text('Create Or Edit Home Page'),
-          Scrollbar(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 10.0),
-                    TextField(
-                      controller: _homeNameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Home Name',
+        child: Column(
+          children: [
+            const Text('Create Or Edit Home Page'),
+            Scrollbar(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10.0),
+                      TextField(
+                        controller: _homeNameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Home Name',
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    TextField(
-                      controller: _streetController,
-                      decoration: const InputDecoration(
-                        labelText: 'Street',
+                      const SizedBox(height: 10.0),
+                      TextField(
+                        controller: _streetController,
+                        decoration: const InputDecoration(
+                          labelText: 'Street',
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    TextField(
-                      controller: _streetNumberController,
-                      decoration: const InputDecoration(
-                        labelText: 'Street Number',
+                      const SizedBox(height: 10.0),
+                      TextField(
+                        controller: _streetNumberController,
+                        decoration: const InputDecoration(
+                          labelText: 'Street Number',
+                        ),
+                        maxLength: 4,
                       ),
-                      maxLength: 4,
-                    ),
-                    const SizedBox(height: 10.0),
-                    TextField(
-                      controller: _postcodeController,
-                      decoration: const InputDecoration(
-                        labelText: 'Postcode',
+                      const SizedBox(height: 10.0),
+                      TextField(
+                        controller: _postcodeController,
+                        decoration: const InputDecoration(
+                          labelText: 'Postcode',
+                        ),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        maxLength: 5,
+                        keyboardType: TextInputType.number,
                       ),
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      maxLength: 5,
-                      keyboardType: TextInputType.number,
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
+                      const SizedBox(height: 10.0),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(context),
     );
