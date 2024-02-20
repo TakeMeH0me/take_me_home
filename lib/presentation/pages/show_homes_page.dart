@@ -14,7 +14,7 @@ class ShowHomesPage extends StatefulWidget {
 }
 
 class _ShowHomesPageState extends State<ShowHomesPage> {
-  final List<HomeEntity> homes = [
+  final List<HomeEntity> _homes = [
     const HomeEntity(
       id: '1',
       name: 'Freundin',
@@ -55,40 +55,57 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          children: getHomeWidgets(context, homes),
+          children: _getHomeWidgets(context),
         ),
       ),
     );
   }
-}
 
-List<Widget> getHomeWidgets(BuildContext context, List<HomeEntity> homesList) {
-  List<Widget> homeCardsWithSpaces = [];
-  for (final HomeEntity home in homesList) {
-    homeCardsWithSpaces.add(
-      SizedBox(
-        width: MediaQuery.of(context).size.width * 0.75,
-        height: 75.0,
-        child: HomeButton(
-          homeName: home.name,
-          onPressed: () {
-            Navigator.of(context).pushNamed(AppRouter.showWayToHome);
-          },
-          onTrailingPressed: () {
-            Navigator.of(context).pushNamed(
-              AppRouter.createOrEditHome,
-              arguments: CreateOrEditHomeArgs(
-                home: home,
-                isNewHome: false,
-              ),
-            );
-          },
+  List<Widget> _getHomeWidgets(BuildContext context) {
+    List<Widget> homeCardsWithSpaces = [];
+    for (final HomeEntity home in _homes) {
+      homeCardsWithSpaces.add(
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.75,
+          height: 75.0,
+          child: HomeButton(
+            homeName: home.name,
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRouter.showWayToHome);
+            },
+            onTrailingPressed: () {
+              _navigateToCreateOrEditHomePage(context, home);
+            },
+          ),
         ),
+      );
+
+      homeCardsWithSpaces.add(const SizedBox(height: 10.0));
+    }
+
+    return homeCardsWithSpaces;
+  }
+
+  Future<void> _navigateToCreateOrEditHomePage(
+    BuildContext context,
+    HomeEntity home,
+  ) async {
+    final newHome = await Navigator.of(context).pushNamed(
+      AppRouter.createOrEditHome,
+      arguments: CreateOrEditHomeArgs(
+        home: home,
+        isNewHome: false,
       ),
     );
 
-    homeCardsWithSpaces.add(const SizedBox(height: 10.0));
-  }
+    if (!context.mounted || newHome == null) {
+      return;
+    }
 
-  return homeCardsWithSpaces;
+    final int indexOfOldHome = _homes.indexOf(home);
+    setState(() {
+      _homes.removeAt(indexOfOldHome);
+      _homes.insert(indexOfOldHome, newHome as HomeEntity);
+    });
+  }
 }
