@@ -1,4 +1,4 @@
-import 'package:take_me_home/domain/entities/home_entity.dart';
+import '../../../domain/entities/home_entity.dart';
 
 /// This class provides the arguments for the [CreateOrEditHomePage].
 ///

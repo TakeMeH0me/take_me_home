@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'injection_container.dart' as injection_container;
 import 'presentation/router/app_router.dart';
 
-void main() {
-  runApp(MainApp(
-    appRouter: AppRouter(),
-  ));
+void main() async {
+  await injection_container.init();
+
+  runApp(
+    MainApp(
+      appRouter: injection_container.sl(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:take_me_home/domain/entities/home_entity.dart';
-import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
+import '../../domain/entities/home_entity.dart';
+import '../router/args/create_or_edit_home_args.dart';
 
 import '../router/app_router.dart';
 import '../widgets/widgets.dart';

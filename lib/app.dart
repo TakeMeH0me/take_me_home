@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:take_me_home/domain/entities/home_entity.dart';
-import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 
+import 'domain/entities/home_entity.dart';
 import 'presentation/pages/pages.dart';
 import 'presentation/router/app_router.dart';
+import 'presentation/router/args/create_or_edit_home_args.dart';
 
 /// Wrapper for the [MainApp].
 /// Controls logic for stuff like tabs, etc.
