@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 
+import 'presentation/router/app_router.dart';
+
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp(
+    appRouter: AppRouter(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final AppRouter appRouter;
+
+  const MainApp({
+    required this.appRouter,
+    super.key,
+  });
+
+  static String get title => 'Take Me Home';
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      title: MainApp.title,
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRouter.root,
+      onGenerateRoute: (settings) => appRouter.onGenerateRoute(settings),
     );
   }
 }

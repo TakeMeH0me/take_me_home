@@ -22,6 +22,12 @@
 
 ## Development
 
+- Verwendung der Stable-Flutter-Version:
+  ```bash
+  flutter channel stable
+  flutter updrade
+  ```
+
 ### Formatting
 
 - Install VSCode-Extension: [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter)
