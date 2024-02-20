@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:take_me_home/presentation/pages/pages.dart';
-import 'package:take_me_home/presentation/router/app_router.dart';
+
+import 'presentation/pages/pages.dart';
+import 'presentation/router/app_router.dart';
 
 /// Wrapper for the [MainApp].
 /// Controls logic for stuff like tabs, etc.

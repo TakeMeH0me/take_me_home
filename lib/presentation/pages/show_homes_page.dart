@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/widgets.dart';
 
 /// Shows all created homes.
@@ -38,11 +39,7 @@ List<Widget> getHomeWidgets(BuildContext context, List<String> homesAsString) {
       ),
     );
 
-    homeCardsWithSpaces.add(
-      const SizedBox(
-        height: 10.0,
-      ),
-    );
+    homeCardsWithSpaces.add(const SizedBox(height: 10.0));
   }
 
   return homeCardsWithSpaces;
