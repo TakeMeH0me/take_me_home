@@ -130,7 +130,7 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
 
 Widget _buildBottomNavigationBar(BuildContext context) {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(20.0),
     child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).pop();
