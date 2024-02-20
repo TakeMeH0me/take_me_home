@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:take_me_home/app.dart';
+import '../../app.dart';
 import '../pages/pages.dart';
 
 /// Lets you route between different pages in the app.
