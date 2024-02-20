@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:uuid/uuid.dart';
 
 /// An instance of a home you wanna go to.
 class HomeEntity extends Equatable {
@@ -33,6 +34,17 @@ class HomeEntity extends Equatable {
       street: street ?? this.street,
       streetNumber: streetNumber ?? this.streetNumber,
       postcode: postcode ?? this.postcode,
+    );
+  }
+
+  factory HomeEntity.empty() {
+    return HomeEntity(
+      id: const Uuid().v4(),
+      name: '',
+      city: '',
+      street: '',
+      streetNumber: '',
+      postcode: 0,
     );
   }
 

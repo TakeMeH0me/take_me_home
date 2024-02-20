@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:take_me_home/domain/entities/home_entity.dart';
+import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 
+import '../router/app_router.dart';
 import '../widgets/widgets.dart';
 
 /// Shows all created homes.
@@ -69,8 +71,18 @@ List<Widget> getHomeWidgets(BuildContext context, List<HomeEntity> homesList) {
         height: 75.0,
         child: HomeButton(
           homeName: home.name,
-          onPressed: () => {},
-          onTrailingPressed: () => {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(AppRouter.showWayToHome);
+          },
+          onTrailingPressed: () {
+            Navigator.of(context).pushNamed(
+              AppRouter.createOrEditHome,
+              arguments: CreateOrEditHomeArgs(
+                home: home,
+                isNewHome: false,
+              ),
+            );
+          },
         ),
       ),
     );
