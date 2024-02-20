@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../widgets/widgets.dart';
 
+/// Shows all created homes.
 class ShowHomesPage extends StatefulWidget {
   const ShowHomesPage({super.key});
 
@@ -28,21 +30,10 @@ List<Widget> getHomeWidgets(BuildContext context, List<String> homesAsString) {
       SizedBox(
         width: MediaQuery.of(context).size.width * 0.75,
         height: 75.0,
-        child: ElevatedButton(
+        child: HomeButton(
+          homeName: home,
           onPressed: () => {},
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-            ),
-          ),
-          child: ListTile(
-            leading: const Icon(Icons.home),
-            trailing: const Icon(Icons.edit),
-            contentPadding: const EdgeInsets.all(0.0),
-            title: Text(home),
-          ),
+          onTrailingPressed: () => {},
         ),
       ),
     );
@@ -60,53 +51,8 @@ List<Widget> getHomeWidgets(BuildContext context, List<String> homesAsString) {
 List<String> getHomesAsString() {
   return [
     'Freundin',
+    'Freund',
     'Uni',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
-    'Elternhaus',
     'Elternhaus',
   ];
 }
