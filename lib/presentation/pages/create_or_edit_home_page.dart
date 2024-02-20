@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../router/app_router.dart';
 
 /// A home can be created ([isEditing] = false) or edited ([isEditing] = true) with this page.
 ///
@@ -110,10 +109,11 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Icon(Icons.save)),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Icon(Icons.save),
+      ),
     );
   }
 

@@ -1,14 +1,15 @@
 name: take_me_home
 description: "Takes you home from a stressful day."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.2.6 <4.0.0'
+  sdk: ">=3.2.6 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
