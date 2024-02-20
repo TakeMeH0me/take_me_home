@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 
 import '../../app.dart';
 import '../pages/pages.dart';
@@ -14,8 +15,13 @@ class AppRouter {
       case root:
         return MaterialPageRoute(builder: (_) => const App());
       case createOrEditHome:
+        final args = settings.arguments as CreateOrEditHomeArgs;
+
         return MaterialPageRoute(
-          builder: (_) => const CreateOrEditHomePage(isEditing: false),
+          builder: (_) => CreateOrEditHomePage(
+            home: args.home,
+            isNewHome: args.isNewHome,
+          ),
         );
       case showWayToHome:
         return MaterialPageRoute(builder: (_) => const ShowWayToHomePage());

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../domain/entities/home_entity.dart';
+
 /// A home can be created ([isEditing] = false) or edited ([isEditing] = true) with this page.
 ///
 /// Adjusts the UI based on the [isEditing] value.
 class CreateOrEditHomePage extends StatefulWidget {
-  final bool isEditing;
+  final HomeEntity home;
+  final bool isNewHome;
 
   const CreateOrEditHomePage({
     super.key,
-    required this.isEditing,
+    required this.home,
+    required this.isNewHome,
   });
 
   @override
