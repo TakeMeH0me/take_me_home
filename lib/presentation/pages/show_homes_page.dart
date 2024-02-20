@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:take_me_home/domain/entities/home_entity.dart';
 
 import '../widgets/widgets.dart';
 
@@ -11,28 +12,63 @@ class ShowHomesPage extends StatefulWidget {
 }
 
 class _ShowHomesPageState extends State<ShowHomesPage> {
+  final List<HomeEntity> homes = [
+    const HomeEntity(
+      id: '1',
+      name: 'Freundin',
+      city: 'Gera',
+      street: 'Test Street',
+      streetNumber: '55a',
+      postcode: 75683,
+    ),
+    const HomeEntity(
+      id: '2',
+      name: 'Elternhaus',
+      city: 'Pößneck',
+      street: 'Test Street',
+      streetNumber: '63a',
+      postcode: 07381,
+    ),
+    const HomeEntity(
+      id: '3',
+      name: 'Eigene Wohung',
+      city: 'Jena',
+      street: 'Coole Streeeeeeeeeeeeeeeeeeeeeeet',
+      streetNumber: '99',
+      postcode: 92379,
+    ),
+    const HomeEntity(
+      id: '4',
+      name: 'Anwesen in den Bergen',
+      city: 'Berchtesgaden',
+      street: 'An der Kuhglocke',
+      streetNumber: '13c',
+      postcode: 12345,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          children: getHomeWidgets(context, getHomesAsString()),
+          children: getHomeWidgets(context, homes),
         ),
       ),
     );
   }
 }
 
-List<Widget> getHomeWidgets(BuildContext context, List<String> homesAsString) {
+List<Widget> getHomeWidgets(BuildContext context, List<HomeEntity> homesList) {
   List<Widget> homeCardsWithSpaces = [];
-  for (final String home in homesAsString) {
+  for (final HomeEntity home in homesList) {
     homeCardsWithSpaces.add(
       SizedBox(
         width: MediaQuery.of(context).size.width * 0.75,
         height: 75.0,
         child: HomeButton(
-          homeName: home,
+          homeName: home.name,
           onPressed: () => {},
           onTrailingPressed: () => {},
         ),
@@ -43,13 +79,4 @@ List<Widget> getHomeWidgets(BuildContext context, List<String> homesAsString) {
   }
 
   return homeCardsWithSpaces;
-}
-
-List<String> getHomesAsString() {
-  return [
-    'Freundin',
-    'Freund',
-    'Uni',
-    'Elternhaus',
-  ];
 }
