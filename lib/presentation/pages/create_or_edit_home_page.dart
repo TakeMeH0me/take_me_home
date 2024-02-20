@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:take_me_home/presentation/router/app_router.dart';
 
 /// A home can be created ([isEditing] = false) or edited ([isEditing] = true) with this page.
@@ -53,7 +54,7 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
           Scrollbar(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -77,6 +78,7 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
                       decoration: const InputDecoration(
                         labelText: 'Street Number',
                       ),
+                      maxLength: 4,
                     ),
                     const SizedBox(height: 10.0),
                     TextField(
@@ -84,6 +86,9 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
                       decoration: const InputDecoration(
                         labelText: 'Postcode',
                       ),
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      maxLength: 5,
+                      keyboardType: TextInputType.number,
                     ),
                     const SizedBox(height: 10.0),
                   ],
@@ -94,6 +99,17 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
         ]),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(context),
+    );
+  }
+
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Icon(Icons.save)),
     );
   }
 
@@ -126,15 +142,4 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
       String City = _cityController.text;
     }
   }
-}
-
-Widget _buildBottomNavigationBar(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        child: const Icon(Icons.save)),
-  );
 }
