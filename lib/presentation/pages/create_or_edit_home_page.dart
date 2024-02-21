@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../domain/entities/home_entity.dart';
+import 'package:take_me_home/domain/entities/home_entity.dart';
 
 /// A home can be created ([isEditing] = false) or edited ([isEditing] = true) with this page.
 ///
@@ -156,13 +156,8 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
   }
 
   _onPostcodeChanged() {
-    final int? postcodeAsInt = int.tryParse(_postcodeController.text);
-    if (postcodeAsInt == null) {
-      return;
-    }
-
     setState(() {
-      currentHome = currentHome.copyWith(postcode: postcodeAsInt);
+      currentHome = currentHome.copyWith(postcode: _postcodeController.text);
     });
   }
 

@@ -8,7 +8,7 @@ class HomeEntity extends Equatable {
   final String city;
   final String street;
   final String streetNumber;
-  final int postcode;
+  final String postcode;
 
   const HomeEntity({
     required this.id,
@@ -25,7 +25,7 @@ class HomeEntity extends Equatable {
     String? city,
     String? street,
     String? streetNumber,
-    int? postcode,
+    String? postcode,
   }) {
     return HomeEntity(
       id: id ?? this.id,
@@ -44,7 +44,7 @@ class HomeEntity extends Equatable {
       city: '',
       street: '',
       streetNumber: '',
-      postcode: 0,
+      postcode: '',
     );
   }
 

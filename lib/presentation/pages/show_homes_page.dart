@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/home_entity.dart';
-import '../router/args/create_or_edit_home_args.dart';
+import 'package:take_me_home/domain/entities/home_entity.dart';
+import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 
-import '../router/app_router.dart';
-import '../widgets/widgets.dart';
+import 'package:take_me_home/presentation/router/app_router.dart';
+import 'package:take_me_home/presentation/widgets/widgets.dart';
 
 /// Shows all created homes.
 class ShowHomesPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
       city: 'Gera',
       street: 'Test Street',
       streetNumber: '55a',
-      postcode: 75683,
+      postcode: '75683',
     ),
     const HomeEntity(
       id: '2',
@@ -29,7 +29,7 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
       city: 'Pößneck',
       street: 'Test Street',
       streetNumber: '63a',
-      postcode: 07381,
+      postcode: '07381',
     ),
     const HomeEntity(
       id: '3',
@@ -37,7 +37,7 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
       city: 'Jena',
       street: 'Coole Streeeeeeeeeeeeeeeeeeeeeeet',
       streetNumber: '99',
-      postcode: 92379,
+      postcode: '92379',
     ),
     const HomeEntity(
       id: '4',
@@ -45,7 +45,7 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
       city: 'Berchtesgaden',
       street: 'An der Kuhglocke',
       streetNumber: '13c',
-      postcode: 12345,
+      postcode: '12345',
     ),
   ];
 

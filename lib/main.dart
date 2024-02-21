@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'injection_container.dart' as injection_container;
-import 'presentation/router/app_router.dart';
+import 'package:take_me_home/injection_container.dart' as injection_container;
+import 'package:take_me_home/presentation/router/app_router.dart';
 
 void main() async {
   await injection_container.init();
