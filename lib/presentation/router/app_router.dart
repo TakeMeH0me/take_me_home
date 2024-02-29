@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../app.dart';
-import '../pages/pages.dart';
+
+import 'package:take_me_home/app.dart';
+import 'package:take_me_home/presentation/pages/pages.dart';
+import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 
 /// Lets you route between different pages in the app.
 class AppRouter {
@@ -13,8 +15,13 @@ class AppRouter {
       case root:
         return MaterialPageRoute(builder: (_) => const App());
       case createOrEditHome:
+        final args = settings.arguments as CreateOrEditHomeArgs;
+
         return MaterialPageRoute(
-          builder: (_) => const CreateOrEditHomePage(isEditing: false),
+          builder: (_) => CreateOrEditHomePage(
+            home: args.home,
+            isNewHome: args.isNewHome,
+          ),
         );
       case showWayToHome:
         return MaterialPageRoute(builder: (_) => const ShowWayToHomePage());

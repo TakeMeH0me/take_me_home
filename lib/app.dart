@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'presentation/pages/pages.dart';
-import 'presentation/router/app_router.dart';
+import 'package:take_me_home/domain/entities/home_entity.dart';
+import 'package:take_me_home/presentation/pages/pages.dart';
+import 'package:take_me_home/presentation/router/app_router.dart';
+import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 
 /// Wrapper for the [MainApp].
 /// Controls logic for stuff like tabs, etc.
@@ -18,7 +20,13 @@ class _AppState extends State<App> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(AppRouter.createOrEditHome);
+          Navigator.of(context).pushNamed(
+            AppRouter.createOrEditHome,
+            arguments: CreateOrEditHomeArgs(
+              home: HomeEntity.empty(),
+              isNewHome: true,
+            ),
+          );
         },
         child: const Icon(Icons.add),
       ),
