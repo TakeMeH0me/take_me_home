@@ -14,13 +14,11 @@ class MeansOfTransportModel extends MeansOfTransportEntity {
           delayInMinutes: delayInMinutes,
         );
 
-  factory MeansOfTransportModel.fromPlainText(String input) {
-    final List<String> splitInput = input.split('\n');
+  factory MeansOfTransportModel.fromPlainText(List<String> input) {
+    final TimeOfDay departureTime = _getDepartureTimeFromString(input[0]);
+    final String name = input[1];
 
-    final TimeOfDay departureTime = _getDepartureTimeFromString(splitInput[0]);
-    final String name = splitInput[1];
-
-    final String delayInformationAsString = splitInput[2];
+    final String delayInformationAsString = input[2];
     // TODO: Refactor this to use strategy pattern?
     if (delayInformationAsString == 'cancel') {
       return MeansOfTransportModel(
@@ -37,8 +35,13 @@ class MeansOfTransportModel extends MeansOfTransportEntity {
         delayInMinutes: 0,
       );
     } else {
-      final String delayLine = splitInput[2];
-      final int delayInMinutes = int.parse(delayLine.substring(2));
+      int delayInMinutes = 0;
+      if (delayInformationAsString.startsWith('+')) {
+        delayInMinutes = int.parse(delayInformationAsString.substring(2));
+      } else {
+        delayInMinutes = int.parse(delayInformationAsString);
+      }
+
       return MeansOfTransportModel(
         name: name,
         departureTime: departureTime,
