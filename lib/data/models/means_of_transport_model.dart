@@ -41,7 +41,8 @@ class MeansOfTransportModel extends MeansOfTransportEntity {
         delayInMinutes: 0,
       );
     } else {
-      final int delayInMinutes = int.parse(splitInput[2]);
+      final String delayLine = splitInput[2];
+      final int delayInMinutes = int.parse(delayLine.substring(2));
       return MeansOfTransportModel(
         name: name,
         departureTime: departureTime,
