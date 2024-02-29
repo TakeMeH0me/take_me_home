@@ -23,7 +23,7 @@ void main() {
       'Should return a valid model when the input is "12:00\ntest\nno".',
       () async {
         // arrange
-        const String input = '12:00\ntest\nno';
+        const List<String> input = ['12:00', 'test', 'no'];
         const expected = MeansOfTransportModel(
           name: 'test',
           departureTime: TimeOfDay(hour: 12, minute: 0),
@@ -43,7 +43,7 @@ void main() {
       'Should return a valid model when the input is "12:00\ntest\ncancel".',
       () async {
         // arrange
-        const String input = '12:00\ntest\ncancel';
+        const List<String> input = ['12:00', 'test', 'cancel'];
         const expected = MeansOfTransportModel(
           name: 'test',
           departureTime: TimeOfDay(hour: 12, minute: 0),
@@ -63,12 +63,32 @@ void main() {
       'Should return a valid model when the input is "12:00\ntest\n+ 5".',
       () async {
         // arrange
-        const String input = '12:00\ntest\n+ 5';
+        const List<String> input = ['12:00', 'test', '+ 5'];
         const expected = MeansOfTransportModel(
           name: 'test',
           departureTime: TimeOfDay(hour: 12, minute: 0),
           isCancelled: false,
           delayInMinutes: 5,
+        );
+
+        // act
+        final actual = MeansOfTransportModel.fromPlainText(input);
+
+        // assert
+        expect(actual, expected);
+      },
+    );
+
+    test(
+      'Should return a valid model when the input is "12:00\ntest\n0".',
+      () async {
+        // arrange
+        const List<String> input = ['12:00', 'test', '0'];
+        const expected = MeansOfTransportModel(
+          name: 'test',
+          departureTime: TimeOfDay(hour: 12, minute: 0),
+          isCancelled: false,
+          delayInMinutes: 0,
         );
 
         // act
