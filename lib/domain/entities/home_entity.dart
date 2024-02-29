@@ -50,13 +50,6 @@ class HomeEntity extends Equatable {
 
   @override
   List<Object> get props {
-    return [
-      id,
-      name,
-      city,
-      street,
-      streetNumber,
-      postcode,
-    ];
+    return [id, name, city, street, streetNumber, postcode];
   }
 }
