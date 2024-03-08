@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class StopoverCard extends StatefulWidget {
+class CurrentLocationCard extends StatefulWidget {
   final String startStation;
   final String distance;
   final String departureArrival;
@@ -8,7 +8,7 @@ class StopoverCard extends StatefulWidget {
   final Icon leadingIcon;
   final Icon? trailingIcon;
 
-  const StopoverCard({
+  const CurrentLocationCard({
     Key? key,
     required this.startStation,
     required this.distance,
@@ -19,10 +19,10 @@ class StopoverCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _StopoverCardState createState() => _StopoverCardState();
+  _CurrentLocationCardState createState() => _CurrentLocationCardState();
 }
 
-class _StopoverCardState extends State<StopoverCard> {
+class _CurrentLocationCardState extends State<CurrentLocationCard> {
   // Hier kannst du Zustandsvariablen definieren und verwalten.
 
   @override
@@ -32,7 +32,11 @@ class _StopoverCardState extends State<StopoverCard> {
         leading: widget.leadingIcon,
         title: Text("${widget.startStation}  ${widget.distance}"),
         subtitle: Text("${widget.departureArrival} \n${widget.track}"),
-        trailing: widget.trailingIcon,
+        trailing: ElevatedButton(
+            onPressed: () {
+              null;
+            },
+            child: widget.trailingIcon),
       ),
     );
   }
