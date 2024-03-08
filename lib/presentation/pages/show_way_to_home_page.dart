@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:take_me_home/domain/entities/home_entity.dart';
 import 'package:take_me_home/domain/entities/station_entity.dart';
+import 'package:take_me_home/presentation/bloc/station/station_bloc.dart';
 
 /// Show one trip to the selected home with single stations,
 /// time between the stations and information to each single station.
@@ -30,24 +32,63 @@ class _ShowWayToHomePageState extends State<ShowWayToHomePage> {
   );
 
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<StationBloc>(context).add(
+      GetMeansOfTransportByTime(
+        _startStation,
+        TimeOfDay.now(),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.home.name,
-                style: const TextStyle(fontSize: 30),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Du musst in #### Minuten loslaufen! 🏃‍♂️',
-                style: TextStyle(fontSize: 16),
-              ),
-            ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.home.name,
+                  style: const TextStyle(fontSize: 30),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Du musst in #### Minuten loslaufen! 🏃‍♂️',
+                  style: TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 10),
+                BlocBuilder<StationBloc, StationState>(
+                  builder: (context, state) {
+                    if (state is StationLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is StationError) {
+                      return Text(state.message);
+                    } else if (state is StationLoaded) {
+                      return Column(
+                        children: state.meansOfTransportEntities
+                            .map(
+                              (meansOfTransportEntity) => ListTile(
+                                title: Text(meansOfTransportEntity.name),
+                                subtitle: Text(
+                                  meansOfTransportEntity.departureTime
+                                      .format(context),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
