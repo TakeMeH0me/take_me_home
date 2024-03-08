@@ -3,6 +3,7 @@ import 'package:take_me_home/domain/entities/home_entity.dart';
 import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 
 import 'package:take_me_home/presentation/router/app_router.dart';
+import 'package:take_me_home/presentation/router/args/show_way_to_home_args.dart';
 import 'package:take_me_home/presentation/widgets/widgets.dart';
 
 /// Shows all created homes.
@@ -71,7 +72,10 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
           child: HomeButton(
             homeName: home.name,
             onPressed: () {
-              Navigator.of(context).pushNamed(AppRouter.showWayToHome);
+              Navigator.of(context).pushNamed(
+                AppRouter.showWayToHome,
+                arguments: ShowWayToHomeArgs(home: home),
+              );
             },
             onTrailingPressed: () {
               _navigateToCreateOrEditHomePage(context, home);
