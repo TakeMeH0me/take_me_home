@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:take_me_home/presentation/widgets/stopover_card.dart';
 
 class ShowHomesPage extends StatefulWidget {
   const ShowHomesPage({super.key});
@@ -10,15 +11,10 @@ class ShowHomesPage extends StatefulWidget {
 class _ShowHomesPageState extends State<ShowHomesPage> {
   @override
   Widget build(BuildContext context) {
-    return _stopoverCard();
+    return StopoverCard(
+        startStation: "Gera Hbf",
+        distance: "15km",
+        departureArrival: "08:00 - 08:30",
+        track: "Gleis 5");
   }
-}
-
-Widget _stopoverCard() {
-  return Card(
-    child: ListTile(
-        leading: Icon(Icons.train),
-        title: Text("Startbahnhof + Entfernung"),
-        subtitle: Text("Abfahrt - Ankunft \nGleis")),
-  );
 }
