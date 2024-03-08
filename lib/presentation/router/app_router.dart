@@ -24,7 +24,13 @@ class AppRouter {
           ),
         );
       case showWayToHome:
-        return MaterialPageRoute(builder: (_) => const ShowWayToHomePage());
+        final args = settings.arguments as CreateOrEditHomeArgs;
+
+        return MaterialPageRoute(
+          builder: (_) => ShowWayToHomePage(
+            home: args.home,
+          ),
+        );
       default:
         return null;
     }
