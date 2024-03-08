@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:take_me_home/domain/entities/home_entity.dart';
+import 'package:take_me_home/domain/entities/means_of_transport_entity.dart';
 import 'package:take_me_home/domain/entities/station_entity.dart';
 import 'package:take_me_home/presentation/bloc/station/station_bloc.dart';
 
@@ -37,7 +38,13 @@ class _ShowWayToHomePageState extends State<ShowWayToHomePage> {
     BlocProvider.of<StationBloc>(context).add(
       GetMeansOfTransportByTime(
         _startStation,
-        TimeOfDay.now(),
+        const TimeOfDay(hour: 13, minute: 40),
+      ),
+    );
+    BlocProvider.of<StationBloc>(context).add(
+      GetMeansOfTransportByTime(
+        _endStation,
+        const TimeOfDay(hour: 14, minute: 40),
       ),
     );
   }
@@ -57,9 +64,23 @@ class _ShowWayToHomePageState extends State<ShowWayToHomePage> {
                   style: const TextStyle(fontSize: 30),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  'Du musst in #### Minuten loslaufen! 🏃‍♂️',
-                  style: TextStyle(fontSize: 16),
+                BlocBuilder<StationBloc, StationState>(
+                  builder: (context, state) {
+                    if (state is StationLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is StationError) {
+                      return Text(state.message);
+                    } else if (state is StationsUpdated) {
+                      final TimeOfDay time =
+                          state.meansOfTransportEntities[0].departureTime;
+                      return Text(
+                        'Du musst in loslaufen ${time.hour - TimeOfDay.now().hour}h und ${time.minute - TimeOfDay.now().minute}min .${time.toString()}',
+                        style: const TextStyle(fontSize: 16),
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
                 ),
                 const SizedBox(height: 10),
                 BlocBuilder<StationBloc, StationState>(
@@ -68,16 +89,27 @@ class _ShowWayToHomePageState extends State<ShowWayToHomePage> {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is StationError) {
                       return Text(state.message);
-                    } else if (state is StationLoaded) {
+                    } else if (state is StationsUpdated) {
                       return Column(
                         children: state.meansOfTransportEntities
                             .map(
-                              (meansOfTransportEntity) => ListTile(
-                                title: Text(meansOfTransportEntity.name),
-                                subtitle: Text(
-                                  meansOfTransportEntity.departureTime
-                                      .format(context),
-                                ),
+                              (meansOfTransportEntity) => Column(
+                                children: [
+                                  Text(
+                                    meansOfTransportEntity.name,
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    '${meansOfTransportEntity.departureTime.hour}:${meansOfTransportEntity.departureTime.minute}',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  Text(
+                                    meansOfTransportEntity.delayInMinutes
+                                        .toString(),
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 10),
+                                ],
                               ),
                             )
                             .toList(),
