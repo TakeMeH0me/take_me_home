@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:take_me_home/domain/entities/home_entity.dart';
 
 /// A home can be created ([isEditing] = false) or edited ([isEditing] = true) with this page.
 ///
 /// Adjusts the UI based on the [isEditing] value.
 class CreateOrEditHomePage extends StatefulWidget {
-  final bool isEditing;
+  final HomeEntity home;
+  final bool isNewHome;
 
   const CreateOrEditHomePage({
     super.key,
-    required this.isEditing,
+    required this.home,
+    required this.isNewHome,
   });
 
   @override
@@ -17,11 +20,25 @@ class CreateOrEditHomePage extends StatefulWidget {
 }
 
 class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
-  final TextEditingController _homeNameController = TextEditingController();
-  final TextEditingController _streetController = TextEditingController();
-  final TextEditingController _streetNumberController = TextEditingController();
-  final TextEditingController _postcodeController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
+  late HomeEntity currentHome = widget.home;
+
+  late final TextEditingController _homeNameController = TextEditingController(
+    text: widget.home.name,
+  );
+  late final TextEditingController _streetController = TextEditingController(
+    text: widget.home.street,
+  );
+  late final TextEditingController _streetNumberController =
+      TextEditingController(
+    text: widget.home.streetNumber,
+  );
+  late final TextEditingController _postcodeController = TextEditingController(
+    text: widget.home.postcode.toString(),
+  );
+  late final TextEditingController _cityController = TextEditingController(
+    text: widget.home.city,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +51,7 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
     _cityController.addListener(_onCityChanged);
   }
 
+  @override
   void dispose() {
     _homeNameController.dispose();
     _streetController.dispose();
@@ -109,40 +127,42 @@ class _CreateOrEditHomePageState extends State<CreateOrEditHomePage> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Icon(Icons.save)),
+        onPressed: () {
+          Navigator.of(context).pop(currentHome);
+        },
+        child: const Icon(Icons.save),
+      ),
     );
   }
 
   _onHomeNameChanged() {
-    setState() {
-      String homeName = _homeNameController.text;
-    }
+    setState(() {
+      currentHome = currentHome.copyWith(name: _homeNameController.text);
+    });
   }
 
   _onStreetChanged() {
-    setState() {
-      String Street = _streetController.text;
-    }
+    setState(() {
+      currentHome = currentHome.copyWith(street: _streetController.text);
+    });
   }
 
   _onNumberChanged() {
-    setState() {
-      String Number = _streetNumberController.text;
-    }
+    setState(() {
+      currentHome =
+          currentHome.copyWith(streetNumber: _streetNumberController.text);
+    });
   }
 
   _onPostcodeChanged() {
-    setState() {
-      String Postcode = _postcodeController.text;
-    }
+    setState(() {
+      currentHome = currentHome.copyWith(postcode: _postcodeController.text);
+    });
   }
 
   _onCityChanged() {
-    setState() {
-      String City = _cityController.text;
-    }
+    setState(() {
+      currentHome = currentHome.copyWith(city: _cityController.text);
+    });
   }
 }
