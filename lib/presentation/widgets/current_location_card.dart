@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:take_me_home/presentation/pages/edit_time_to_start_page.dart';
 
 class CurrentLocationCard extends StatefulWidget {
   final String startStation;
@@ -6,7 +7,7 @@ class CurrentLocationCard extends StatefulWidget {
   final String departureArrival;
   final String track;
   final Icon leadingIcon;
-  final Icon? trailingIcon;
+  final Icon trailingIcon;
 
   const CurrentLocationCard({
     Key? key,
@@ -15,7 +16,7 @@ class CurrentLocationCard extends StatefulWidget {
     required this.departureArrival,
     required this.track,
     required this.leadingIcon,
-    this.trailingIcon,
+    required this.trailingIcon,
   }) : super(key: key);
 
   @override
@@ -23,7 +24,18 @@ class CurrentLocationCard extends StatefulWidget {
 }
 
 class _CurrentLocationCardState extends State<CurrentLocationCard> {
-  // Hier kannst du Zustandsvariablen definieren und verwalten.
+  void _navigateAndDisplaySelection(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling Navigator.pop on the Selection Screen
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => EditTimeToStart()),
+    );
+
+    // After the Selection Screen returns a result, show it in a Snackbar!
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text('$result')));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +44,12 @@ class _CurrentLocationCardState extends State<CurrentLocationCard> {
         leading: widget.leadingIcon,
         title: Text("${widget.startStation}  ${widget.distance}"),
         subtitle: Text("${widget.departureArrival} \n${widget.track}"),
-        trailing: ElevatedButton(
-            onPressed: () {
-              null;
-            },
-            child: widget.trailingIcon),
+        trailing: IconButton(
+          onPressed: () {
+            _navigateAndDisplaySelection(context);
+          },
+          icon: widget.trailingIcon,
+        ),
       ),
     );
   }

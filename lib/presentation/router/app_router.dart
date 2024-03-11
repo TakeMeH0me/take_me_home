@@ -32,6 +32,7 @@ class AppRouter {
             home: args.home,
           ),
         );
+
       default:
         return null;
     }

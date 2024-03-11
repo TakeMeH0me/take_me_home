@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:take_me_home/domain/entities/home_entity.dart';
+import 'package:take_me_home/presentation/pages/edit_time_to_start_page.dart';
 import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 import 'package:take_me_home/presentation/router/app_router.dart';
 import 'package:take_me_home/presentation/router/args/show_way_to_home_args.dart';
+import 'package:take_me_home/presentation/widgets/current_location_card.dart';
 import 'package:take_me_home/presentation/widgets/widgets.dart';
 
 /// Shows all created homes.
@@ -54,9 +56,17 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: _getHomeWidgets(context),
-        ),
+        child: Column(children: [
+          const CurrentLocationCard(
+            startStation: 'Gera Dhge',
+            distance: '12',
+            departureArrival: 'Hallo',
+            track: 'test',
+            leadingIcon: Icon(Icons.gps_fixed),
+            trailingIcon: Icon(Icons.edit),
+          ),
+          ..._getHomeWidgets(context),
+        ]),
       ),
     );
   }
