@@ -35,7 +35,9 @@ class _CurrentLocationCardState extends State<CurrentLocationCard> {
 
     widget.onResult(result);
 
-    // After the Selection Screen returns a result, show it in a Snackbar!
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text('$result')));
   }
 
   @override

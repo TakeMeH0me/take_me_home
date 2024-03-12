@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:take_me_home/domain/entities/home_entity.dart';
-import 'package:take_me_home/presentation/pages/edit_time_to_start_page.dart';
 import 'package:take_me_home/presentation/router/args/create_or_edit_home_args.dart';
 import 'package:take_me_home/presentation/router/app_router.dart';
 import 'package:take_me_home/presentation/router/args/show_way_to_home_args.dart';
@@ -64,13 +63,13 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
           const CurrentLocationCard(
-            startStation: 'Gera Dhge',
-            distance: '12',
-            departureArrival: 'Hallo',
+            startStation: 'Gera DHGE',
+            distance: '',
+            departureArrival: 'Weg der Freundschaft 4',
             leadingIcon: Icon(Icons.gps_fixed),
             trailingIcon: Icon(Icons.edit),
             onResult: onResultRecieved,
-            track: 'hallo',
+            track: '07546 Gera',
           ),
           ..._getHomeWidgets(context),
         ]),
@@ -89,11 +88,11 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
           _deleteHome(home.id);
         },
         background: Container(
-          color: Colors.red,
-          alignment: Alignment.centerRight,
-          padding: EdgeInsets.only(right: 20.0),
-          child: Icon(Icons.delete, color: Colors.white),
-        ),
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 20.0),
+            decoration: BoxDecoration(
+                color: Colors.red, borderRadius: BorderRadius.circular(10)),
+            child: const Icon(Icons.delete, color: Colors.white)),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.75,
           height: 75.0,

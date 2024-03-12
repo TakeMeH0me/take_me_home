@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class EditTimeToStart extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _EditTimeToStartState extends State<EditTimeToStart> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
               // Textfeld für Stunden
@@ -23,12 +24,14 @@ class _EditTimeToStartState extends State<EditTimeToStart> {
                 controller: hourController,
                 decoration: InputDecoration(labelText: 'Stunde'),
                 keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
               // Textfeld für Minuten
               TextField(
                 controller: minuteController,
                 decoration: InputDecoration(labelText: 'Minute'),
                 keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
               OutlinedButton(
                 child: Icon(Icons.save),
