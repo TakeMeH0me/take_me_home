@@ -5,12 +5,17 @@ import 'package:http/http.dart' as http;
 import 'package:take_me_home/data/data_sources/station_remote_data_source.dart';
 import 'package:take_me_home/data/repository/station_repository_impl.dart';
 import 'package:take_me_home/domain/repository/station_repository.dart';
+import 'package:take_me_home/presentation/bloc/station/station_bloc.dart';
 
 import 'package:take_me_home/presentation/router/app_router.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  sl.registerLazySingleton<StationBloc>(() => StationBloc(
+        stationRepository: sl(),
+      ));
+
   sl.registerLazySingleton<StationRepository>(() => StationRepositoryImpl(
         remoteDataSource: sl(),
         networkInfo: sl(),
