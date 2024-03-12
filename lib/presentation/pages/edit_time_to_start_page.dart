@@ -14,36 +14,40 @@ class _EditTimeToStartState extends State<EditTimeToStart> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            // Textfeld für Stunden
-            TextField(
-              controller: hourController,
-              decoration: InputDecoration(labelText: 'Stunde'),
-              keyboardType: TextInputType.number,
-            ),
-            // Textfeld für Minuten
-            TextField(
-              controller: minuteController,
-              decoration: InputDecoration(labelText: 'Minute'),
-              keyboardType: TextInputType.number,
-            ),
-            OutlinedButton(
-              child: Icon(Icons.save),
-              onPressed: () {
-                // Erstellung eines TimeOfDay Objektes aus den Eingaben
-                final int hour = int.tryParse(hourController.text) ??
-                    0; // Standardwert 0, wenn Konvertierung fehlschlägt
-                final int minute = int.tryParse(minuteController.text) ??
-                    0; // Standardwert 0, wenn Konvertierung fehlschlägt
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: <Widget>[
+              // Textfeld für Stunden
+              TextField(
+                controller: hourController,
+                decoration: InputDecoration(labelText: 'Stunde'),
+                keyboardType: TextInputType.number,
+              ),
+              // Textfeld für Minuten
+              TextField(
+                controller: minuteController,
+                decoration: InputDecoration(labelText: 'Minute'),
+                keyboardType: TextInputType.number,
+              ),
+              OutlinedButton(
+                child: Icon(Icons.save),
+                onPressed: () {
+                  // Erstellung eines TimeOfDay Objektes aus den Eingaben
+                  final int hour = int.tryParse(hourController.text) ??
+                      0; // Standardwert 0, wenn Konvertierung fehlschlägt
+                  final int minute = int.tryParse(minuteController.text) ??
+                      0; // Standardwert 0, wenn Konvertierung fehlschlägt
 
-                TimeOfDay selectedTime = TimeOfDay(hour: hour, minute: minute);
+                  TimeOfDay selectedTime =
+                      TimeOfDay(hour: hour, minute: minute);
 
-                // Verwendung von Navigator.pop, um die ausgewählte Zeit zurück zur vorherigen Seite zu senden
-                Navigator.pop(context, selectedTime);
-              },
-            )
-          ],
+                  // Verwendung von Navigator.pop, um die ausgewählte Zeit zurück zur vorherigen Seite zu senden
+                  Navigator.pop(context, selectedTime);
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

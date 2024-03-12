@@ -8,6 +8,7 @@ class CurrentLocationCard extends StatefulWidget {
   final String track;
   final Icon leadingIcon;
   final Icon trailingIcon;
+  final Function(dynamic result) onResult;
 
   const CurrentLocationCard({
     Key? key,
@@ -17,6 +18,7 @@ class CurrentLocationCard extends StatefulWidget {
     required this.track,
     required this.leadingIcon,
     required this.trailingIcon,
+    required this.onResult,
   }) : super(key: key);
 
   @override
@@ -31,10 +33,9 @@ class _CurrentLocationCardState extends State<CurrentLocationCard> {
       MaterialPageRoute(builder: (context) => EditTimeToStart()),
     );
 
+    widget.onResult(result);
+
     // After the Selection Screen returns a result, show it in a Snackbar!
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('$result')));
   }
 
   @override

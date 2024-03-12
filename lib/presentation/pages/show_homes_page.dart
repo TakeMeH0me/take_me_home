@@ -16,6 +16,12 @@ class ShowHomesPage extends StatefulWidget {
 }
 
 class _ShowHomesPageState extends State<ShowHomesPage> {
+  void _deleteHome(String id) {
+    setState(() {
+      _homes.removeWhere((home) => home.id == id);
+    });
+  }
+
   final List<HomeEntity> _homes = [
     const HomeEntity(
       id: '1',
@@ -61,9 +67,10 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
             startStation: 'Gera Dhge',
             distance: '12',
             departureArrival: 'Hallo',
-            track: 'test',
             leadingIcon: Icon(Icons.gps_fixed),
             trailingIcon: Icon(Icons.edit),
+            onResult: onResultRecieved,
+            track: 'hallo',
           ),
           ..._getHomeWidgets(context),
         ]),
@@ -74,8 +81,20 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
   List<Widget> _getHomeWidgets(BuildContext context) {
     List<Widget> homeCardsWithSpaces = [];
     for (final HomeEntity home in _homes) {
-      homeCardsWithSpaces.add(
-        SizedBox(
+      final Widget dismissibleCard = Dismissible(
+        key: Key(home.id), // Unique key for Dismissible
+        direction: DismissDirection.endToStart, // Swipe direction
+        onDismissed: (direction) {
+          // Callback when the item is dismissed
+          _deleteHome(home.id);
+        },
+        background: Container(
+          color: Colors.red,
+          alignment: Alignment.centerRight,
+          padding: EdgeInsets.only(right: 20.0),
+          child: Icon(Icons.delete, color: Colors.white),
+        ),
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.75,
           height: 75.0,
           child: HomeButton(
@@ -93,6 +112,7 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
         ),
       );
 
+      homeCardsWithSpaces.add(dismissibleCard);
       homeCardsWithSpaces.add(const SizedBox(height: 10.0));
     }
 
@@ -121,4 +141,10 @@ class _ShowHomesPageState extends State<ShowHomesPage> {
       _homes.insert(indexOfOldHome, newHome as HomeEntity);
     });
   }
+}
+
+TimeOfDay onResultRecieved(dynamic result) {
+  TimeOfDay time = TimeOfDay(hour: result.hour, minute: result.minute);
+
+  return time;
 }
